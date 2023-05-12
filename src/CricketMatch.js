@@ -68,6 +68,23 @@ const CricketMatch = () => {
     setter(e.target.value.split('\n'));
   };
 
+  const downloadCsv = () => {
+    let csvContent = "Team1,Team2,Field,StartTime,EndTime,Umpire1,Umpire2\n";
+    matches.forEach(match => {
+      csvContent += `${match.teams[0]},${match.teams[1]},${match.field},${match.timeRange[0].format('hh:mm A')},${match.timeRange[1].format('hh:mm A')},${match.umpires[0]},${match.umpires[1]}\n`;
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'matches.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div>
       <div>
@@ -83,6 +100,7 @@ const CricketMatch = () => {
         <textarea placeholder="Enter field names" onChange={handleInput(setFields)} defaultValue={DEFAULT_GROUNDS} />
       </div>
       <button onClick={generateMatches}>Generate Matches</button>
+      {matches.length > 0 && <button onClick={downloadCsv}>Download to CSV</button>}
       <div>
         {matches.map((match, index) => (
           <p key={index}>
