@@ -87,17 +87,17 @@ const CricketMatch = () => {
 
   return (
     <div>
-      <div>
+      <div style={{ display: "flex" }}>
         <span>Team names</span>
-        <textarea placeholder="Enter team names" onChange={handleInput(setTeams)} defaultValue={DEFAULT_TEAMS.split(",")} />
+        <textarea placeholder="Enter team names" onChange={handleInput(setTeams)} defaultValue={DEFAULT_TEAMS.split(",")} rows={20} cols={20} />
       </div>
-      <div>
+      <div style={{ display: "flex" }}>
         <span>Umpire names</span>
-        <textarea placeholder="Enter umpire names" onChange={handleInput(setUmpires)} defaultValue={DEFAULT_UMPIRES} />
+        <textarea placeholder="Enter umpire names" onChange={handleInput(setUmpires)} defaultValue={DEFAULT_UMPIRES} rows={20} cols={20} />
       </div>
-      <div>
+      <div style={{ display: "flex" }}>
         <span>Field names</span>
-        <textarea placeholder="Enter field names" onChange={handleInput(setFields)} defaultValue={DEFAULT_GROUNDS} />
+        <textarea placeholder="Enter field names" onChange={handleInput(setFields)} defaultValue={DEFAULT_GROUNDS} rows={20} cols={20} />
       </div>
       <button onClick={generateMatches}>Generate Matches</button>
       {matches.length > 0 && <button onClick={downloadCsv}>Download to CSV</button>}
